@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+	
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Manchester Safe House -- Join us. Be you.</title>
+		<meta name="description"
+			content="Join Manchester Safe House. Purposeful work protecting families and serving our community." />
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap"
+			rel="stylesheet" />
+		
+		<style>
+:root
+{
+	--bg: #0a0a0b;
+	--text: #f5f7fb;
+	--muted: #cfd5df;
+	--gold: #ffd75e;
+	--ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+*
+{
+	box-sizing: border-box
+}
+
+html
+{
+	scroll-behavior: smooth
+}
+
+body
+{
+	margin: 0;
+	font-family: Inter, -apple-system, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+	color: var(--text);
+	background: var(--bg);
+	overflow-x: hidden;
+}
+
+/* --- Background stack --- */
+.bg-stack
+{
+	position: fixed;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+	overflow: hidden;
+	background:
+		radial-gradient(950px 420px at 85% -10%, rgba(255, 215, 94, .08), transparent 60%),
+		radial-gradient(900px 520px at 5% 110%, rgba(255, 215, 94, .05), transparent 60%),
+		linear-gradient(180deg, #0a0a0b, #0b0b0c 60%, #0a0a0b);
+}
+
+.bg-img
+{
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	opacity: 0;
+	transform: scale(1);
+	will-change: transform, opacity;
+	filter: saturate(105%) contrast(105%) brightness(90%);
+	transition: opacity .8s var(--ease);
+}
+
+.bg-img.is-active
+{
+	opacity: 1;
+}
+
+.bg-overlay
+{
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(180deg, rgba(0, 0, 0, .58), rgba(0, 0, 0, .35) 45%, rgba(0, 0, 0, .58))
+}
+
+/* --- Story-specific Image --- */
+.story-image-container {
+    position: fixed;
+    inset: 0;
+    z-index: 2; /* Above backgrounds, below text */
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.8s var(--ease);
+}
+
+.story-image-container.is-visible {
+    opacity: 1;
+}
+
+#quote5-image {
+    position: absolute;
+    top: 0;
+    right: 0%;
+    transform: translateX(5%); /* Adjust horizontal position */
+    height: 100vh;
+    width: auto;
+    max-width: none;
+}
+
+
+/* --- Header --- */
+.apple-header
+{
+	position: fixed;
+	inset-inline: 0;
+	top: 0;
+	z-index: 60;
+	background: linear-gradient(180deg, rgba(10, 10, 11, .75), rgba(10, 10, 11, .35) 70%, rgba(10, 10, 11, 0));
+	-webkit-backdrop-filter: blur(10px) saturate(120%);
+	backdrop-filter: blur(10px) saturate(120%);
+	border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.apple-header .inner
+{
+	max-width: 1280px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 60px;
+	padding: 0 16px;
+}
+
+.brand-left
+{
+	font-weight: 800;
+	letter-spacing: .2px;
+	font-size: 1.05rem;
+	color: #e9edf6;
+}
+
+.nav-right
+{
+	display: flex;
+	align-items: center;
+	gap: 22px;
+}
+
+.nav-right a
+{
+	color: #e6ebf6;
+	text-decoration: none;
+	font-size: .9rem;
+	opacity: .85;
+	transition: opacity .25s var(--ease);
+}
+
+.nav-right a:hover, .nav-right a[aria-current="true"]
+{
+	opacity: 1;
+}
+
+/* --- Main Content --- */
+main
+{
+	position: relative;
+	z-index: 5;
+}
+
+section
+{
+	min-height: 100vh;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	padding: 12vh 1rem;
+    position: relative;
+}
+
+.content
+{
+	width: min(1100px, 92vw);
+	text-align: center;
+    position: relative;
+}
+
+.crest
+{
+	width: min(560px, 70vw);
+	height: auto;
+	margin: 0 auto 1.25rem;
+	display: block;
+}
+
+
+h1
+{
+	font-weight: 900;
+	letter-spacing: -.02em;
+	line-height: 1.05;
+	font-size: clamp(2rem, 2rem + 4vw, 5rem);
+	margin: 1 1 1rem;
+	text-shadow: 0 2px 28px rgba(0, 0, 0, .45)
+}
+
+.intro-title .line {
+    display: block; /* Ensures they stack vertically */
+}
+
+h2
+{
+	font-weight: 900;
+	letter-spacing: -.02em;
+	line-height: 1.05;
+	font-size: clamp(2rem, 1rem + 4vw, 4rem);
+	margin: 1 1 1rem;
+	text-shadow: 0 2px 28px rgba(0, 0, 0, .45)
+}
+
+.gold
+{
+	color: var(--gold);
+	text-shadow: 0 0 22px rgba(255, 215, 94, .25)
+}
+
+
+.quote-wrap
+{
+	text-align: left;
+	margin-inline: auto;
+	width: min(800px, 92vw); /* Narrower for better readability */
+}
+
+.quote-lines
+{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.quote-line
+{
+	margin: .12rem 0;
+	padding: 0;
+	font-size: clamp(1.5rem, 1.2rem + 2.2vw, 2.8rem); /* Slightly smaller for long quotes */
+	font-weight: 600;
+	letter-spacing: -.01em;
+	line-height: 1.2;
+	opacity: 0.3; /* Dim by default */
+	text-shadow: 0 2px 28px rgba(0, 0, 0, .45);
+    transition: opacity 0.4s var(--ease); /* Smooth transition for highlighting */
+}
+
+.quote-line.is-highlighted {
+    opacity: 1; /* Highlight class */
+}
+
+.author
+{
+	margin: 1.5rem 0 0;
+	color: #e6e9f3;
+	font-weight: 600;
+	font-size: clamp(1rem, .9rem + .45vw, 1.1rem);
+}
+
+.cta-row
+{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	margin-top: 1.5rem;
+	flex-wrap: wrap
+}
+
+.btn
+{
+	appearance: none;
+	border: none;
+	border-radius: 999px;
+	padding: .85rem 1.2rem;
+	background: #ffffff;
+	color: #0b0b0c;
+	font-weight: 700;
+	font-size: 1rem;
+	box-shadow: 0 10px 24px rgba(0, 0, 0, .35);
+	cursor: pointer;
+	text-decoration: none;
+	display: inline-block
+}
+
+.link
+{
+	color: #eef2f9;
+	text-decoration: none;
+	font-weight: 700;
+	font-size: 1rem;
+	opacity: .95
+}
+
+.link:hover
+{
+	opacity: 1;
+	text-decoration: underline;
+	text-underline-offset: 4px
+}
+
+/* --- No-JS Fallback --- */
+.no-js .quote-line { opacity: 1; }
+.no-js .author, .no-js .cta-row { opacity: 1; }
+.no-js .intro-title .line { opacity: 1; transform: none; }
+.no-js .quote-wrap { opacity: 1; transform: none; }
+
+
+@media (prefers-reduced-motion: reduce)
+{
+	.bg-img, .quote-line {
+		transition: none !important;
+		animation: none !important
+	}
+}
+
+		</style>
+	</head>
+	
+	<body class="no-js">
+
+		<!-- Backgrounds -->
+		<div class="bg-stack" aria-hidden="true">
+			<img class="bg-img is-active" src="bg0.webp" alt="" />
+			<img class="bg-img" src="bg1.webp" alt="" />
+			<img class="bg-img" src="bg2.webp" alt="" />
+			<img class="bg-img" src="bg3.webp" alt="" />
+			<img class="bg-img" src="bg4.webp" alt="" />
+			<img class="bg-img" src="bg5.webp" alt="" />
+			<img class="bg-img" src="bg6.webp" alt="" />
+			<img class="bg-img" src="bg7.webp" alt="" />
+			<img class="bg-img" src="bg8.webp" alt="" />
+			<div class="bg-overlay"></div>
+		</div>
+
+        <!-- Story-specific Image Container -->
+        <div id="quote5-image-container" class="story-image-container">
+            <img id="quote5-image" src="img4.webp" alt="Hand holding an iPhone displaying an Apple Account balance, symbolizing financial success." />
+        </div>
+		
+		<!-- Header -->
+		<header class="apple-header" role="banner" aria-label="Primary">
+			<div class="inner">
+				<div class="brand-left">Career at <span class="accent">MANCHESTER SAFE HOUSE</span></div>
+				<nav class="nav-right" aria-label="Global">
+					<a href="#intro">Overview</a>
+					<a href="#quote1">Work at Manchester Safe House</a>
+					<a href="#quote2">Life at Manchester Safe House</a>
+					<a href="#quote3">Manchester Safe House itself</a>
+                    <a href="#quote4">Shared Values</a>
+                    <a href="#quote5">Benefits</a>
+				</nav>
+			</div>
+		</header>
+		
+		<!-- Main Content -->
+		<main id="main" tabindex="-1">
+			<section id="intro" aria-label="Intro">
+				<div class="content">
+					<img id="crestImg" class="crest" src="crest.webp"
+						alt="Manchester Safe House crest logo" />
+					<h1 class="intro-title">
+                        <span class="line">Join us.</span>
+                        <span class="line"><span class="gold">Be you.</span></span>
+                    </h1>
+				</div>
+			</section>
+			
+			<!-- QUOTE 1 -->
+			<section id="quote1" aria-labelledby="quote1-heading">
+				<div class="quote-wrap">
+                    <h1 id="quote1-heading">The <span class="gold">lions</span> den</h1>
+					<ul class="quote-lines">
+                        <li class="quote-line">This is where those who drove at 2 AM,</li> 
+                        <li class="quote-line">who knocked at 6 AM,</li> 
+                        <li class="quote-line">when society said salesman</li> 
+                        <li class="quote-line">and labor technicians were beneath.</li> 
+                        <li class="quote-line"> <span class="gold">ꕹ </span></li>
+                        <li class="quote-line">The den of lions</li> 
+                        <li class="quote-line">saw my <span class="gold">will</span> to drive,</li>
+                        <li class="quote-line">to <span class="gold">feed</span> my kids,</li>
+                        <li class="quote-line">to cover the rent—</li> 
+                        <li class="quote-line">it shined with <span class="gold">worth.</span> </li>
+                        <li class="quote-line"> <span class="gold">ꕹ </span></li>
+                        <li class="quote-line">I was invited in,</li> 
+                        <li class="quote-line">to stand with lions,</li> 
+                        <li class="quote-line">when they saw I <span class="gold">needed</span> </li>
+                        <li class="quote-line">to succeed as badly</li> 
+                        <li class="quote-line">as I wanted to <span class="gold">breathe.</span> </li>
+                        <li class="quote-line"> <span class="gold">ꕹ 👇🏻</span></li>
+                        <li class="quote-line">That is the only <span class="gold">skill</span> </li>
+                        <li class="quote-line">that matters to us.</li> 
+					</ul>
+					<p class="author">Tadju <span class="gold">01</span>, Sales Representative & Alarm Technician</p>
+					<div class="cta-row">
+						<a href="#" class="btn">Watch the film</a>
+						<a href="#" class="link">Learn about who works at Manchester Safe House</a>
+					</div>
+				</div>
+			</section>
+
+			<!-- QUOTE 2 -->
+			<section id="quote2" aria-labelledby="quote2-heading">
+				<div class="quote-wrap">
+					<h2 id="quote2-heading"><span class="gold">Neighbors </span>make the lion</h2>
+					<ul class="quote-lines">
+						<li class="quote-line">Manchester Safe House</li>
+						<li class="quote-line">has always focused</li>
+						<li class="quote-line">on one thing — <span class="gold">neighbors.</span></li>
+						<li class="quote-line"> <span class="gold">ꕹ 👇🏻</span></li>
+						<li class="quote-line">Working side by side,</li>
+						<li class="quote-line">you’ll see why every family feels secure</li>
+						<li class="quote-line">and every block feels connected. </li>
+						<li class="quote-line"> <span class="gold">ꕹ 👆🏻</span></li>
+						<li class="quote-line">Our <span class="gold">roster</span> system,</li>
+						<li class="quote-line">our <span class="gold">embroidered</span> names,</li>
+						<li class="quote-line">our <span class="gold">personalized</span> crest signs</li>
+						<li class="quote-line">every <span class="gold">detail</span> is built</li>
+						<li class="quote-line">for the <span class="gold">people</span> who trust us</li>
+						<li class="quote-line">with their <span class="gold">homes.</span></li>
+					</ul>
+					<p class="author">Albin <span class="gold">03</span>, Sales Representative & Alarm Technician</p>
+					<div class="cta-row">
+						<a href="#" class="btn">Watch the film</a>
+						<a href="#" class="link">Learn about work at Manchester Safe House</a>
+					</div>
+				</div>
+			</section>
+
+			<!-- QUOTE 3 -->
+			<section id="quote3" aria-labelledby="quote3-heading">
+				<div class="quote-wrap">
+				
+					<h1 id="quote3-heading">How we <span class="gold">work</span></h1>
+					<ul class="quote-lines">
+                        <li class="quote-line">The lions’ den most enduring</li>
+                        <li class="quote-line">design may be the</li>
+                        <li class="quote-line">lions’ den itself.</li>
+						<li class="quote-line"> <span class="gold">ꕹ </span></li>
+                        <li class="quote-line">Manchester Safe House runs</li>
+                        <li class="quote-line">on <span class="gold">integration,</span> </li> 
+                        <li class="quote-line">not silos —</li> 
+                        <li class="quote-line">that’s rare for a company in our industry.</li>
+						<li class="quote-line"> <span class="gold">ꕹ 👇🏻</span></li>
+                        <li class="quote-line">We’re experts at every role.</li>
+                        <li class="quote-line">This differs from most other door-to-door companies.</li> 
+						<li class="quote-line"> <span class="gold">ꕹ 👆🏻</span></li>
+                        <li class="quote-line">Others divide the work:</li>
+                        <li class="quote-line">one sells,</li>
+                        <li class="quote-line">one installs,</li>
+                        <li class="quote-line">one services.</li>
+						<li class="quote-line"> <span class="gold">ꕹ </span></li>
+                        <li class="quote-line">At Manchester, one <span class="gold"> Lion</span> </li>
+                        <li class="quote-line">is an expert at all three.</li>
+                        <li class="quote-line">That <span class="gold"> continuity builds stability.</span> </li>
+					</ul>
+					<p class="author">Pedro <span class="gold">04</span>, Sales Representative & Alarm Technician</p>
+					<div class="cta-row">
+						<a href="#" class="btn">Watch the film</a>
+						<a href="#" class="link">Learn about how Manchester Safe House is organized for innovation.</a>
+					</div>
+				</div>
+			</section>
+            
+            <!-- QUOTE 4 -->
+			<section id="quote4" aria-labelledby="quote4-heading">
+				<div class="quote-wrap">
+                    <h2 id="quote4-heading">More than work. <span class="gold">A family.</span></h2>
+					<ul class="quote-lines">
+                        <li class="quote-line">The <span class="gold">Lions’ Den</span> counts on me.</li>
+                        <li class="quote-line">I work <span class="gold">5 PM to 8 PM</span></li>
+                        <li class="quote-line">because we reject <span class="gold">burnout</span>.</li>
+						<li class="quote-line"> <span class="gold">ꕹ </span></li>
+                        <li class="quote-line">I work with <span class="gold">neighbors</span></li>
+                        <li class="quote-line">because we reject <span class="gold">solicitors.</span></li>
+  						<li class="quote-line"> <span class="gold">ꕹ </span></li>
+                        <li class="quote-line">I work with every level</li>
+                        <li class="quote-line">because we reject <span class="gold">corporate bosses.</span></li>
+						<li class="quote-line"> <span class="gold">ꕹ </span></li>
+                        <li class="quote-line">Before, I searched for <span class="gold">stability</span> —</li>
+                        <li class="quote-line">part-time work as a <span class="gold">single mother.</span></li>
+                        <li class="quote-line">I joined as the first <span class="gold">Lioness</span>,</li>
+                        <li class="quote-line">with no sales or tech experience.</li>
+						<li class="quote-line"> <span class="gold">ꕹ </span></li>
+                        <li class="quote-line">With <span class="gold">training</span>, I gained the tools to <span class="gold">thrive</span> —</li>
+                        <li class="quote-line">an iPhone for seamless teamwork,</li>
+                        <li class="quote-line">through iMessage and Messenger.</li>
+                        <li class="quote-line">From day one, I had</li>
+                        <li class="quote-line">the <span class="gold">guidance</span> to make my first sale.</li>
+						<li class="quote-line"> <span class="gold">ꕹ </span></li>
+                        <li class="quote-line">This feels like more than <span class="gold">coworkers</span>.</li>
+                        <li class="quote-line">It feels like <span class="gold">family</span>.</li>
+						<li class="quote-line"> <span class="gold">ꕹ </span></li>
+                        <li class="quote-line">Now it’s not about rent.</li>
+                        <li class="quote-line">It’s about walking into</li>
+                        <li class="quote-line">the <span class="gold">home I own</span></li>
+                        <li class="quote-line">with my <span class="gold">children</span>.</li>
+                        <li class="quote-line">And down the street —</li>
+                        <li class="quote-line">a <span class="gold">home</span> I bought</li>
+                        <li class="quote-line">for my <span class="gold">parents</span>.</li>
+					</ul>
+					<p class="author">Maya <span class="gold">37</span>, Sales Representative & Alarm Technician</p>
+					<div class="cta-row">
+						<a href="#" class="btn">Watch the film</a>
+						<a href="#" class="link">Learn about why we work at Manchester Safe House</a>
+					</div>
+				</div>
+			</section>
+
+			<!-- QUOTE 5 -->
+			<section id="quote5" aria-labelledby="quote5-heading">
+				<div class="quote-wrap">
+                    <h2 id="quote5-heading">Residuals <span class="gold">build legacy.</span></h2>
+					<ul class="quote-lines">
+                        <li class="quote-line">Our Lions carry <span class="gold"> hunger,</span> </li>
+                        <li class="quote-line">the <span class="gold"> urgency to win,</span> </li>
+                        <li class="quote-line">the <span class="gold"> discipline to stay.</span> </li>
+						<li class="quote-line"> <span class="gold">ꕹ </span></li>
+                        <li class="quote-line">And the reward is lasting.</li>
+                        <li class="quote-line"><span class="gold"> Residuals</span>  keep flowing.</li>
+                        <li class="quote-line">You are <span class="gold"> paid</span>  forever.</li>
+						<li class="quote-line"> <span class="gold">ꕹ </span></li>
+                        <li class="quote-line">That is <span class="gold"> freedom.</span> </li>
+                        <li class="quote-line">That is <span class="gold"> permanence.</span> </li>
+                        <li class="quote-line">That is <span class="gold"> eternal progression.</span> </li>
+						<li class="quote-line"> <span class="gold">ꕹ </span></li>
+                        <li class="quote-line">This is our promise:</li>
+                        <li class="quote-line"><span class="gold"> wealth</span>  built on</li>
+                        <li class="quote-line"><span class="gold"> loyalty.</span> </li>
+					</ul>
+					<p class="author">Derek <span class="gold">05</span>, Sales Representative & Alarm Technician</p>
+					<div class="cta-row">
+						<a href="#" class="btn">Watch the film</a>
+						<a href="#" class="link">Learn more about what works for Manchester Safe House</a>
+					</div>
+				</div>
+			</section>
+		</main>
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous"></script>
+		<script>
+(function ()
+{
+	document.body.classList.remove('no-js');
+
+    const hasGSAP = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+    if (!hasGSAP) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // --- INTRO ANIMATIONS ---
+    gsap.set('.apple-header', { y: '-100%' });
+    gsap.set('.intro-title .line', { opacity: 0, y: 30 });
+    gsap.set('.quote-wrap', { opacity: 0, y: 40 });
+    gsap.set('.author, .cta-row', { opacity: 0, y: 20 });
+    gsap.set('#quote5-image', { y: '-100%' }); // Start image above the viewport
+
+    gsap.to('.apple-header', { y: '0%', duration: 1, ease: 'power2.out', delay: 0.2 });
+    gsap.to('.intro-title .line', { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out', stagger: 0.2, delay: 0.6 });
+
+    // --- SCROLL-BASED ANIMATIONS ---
+
+    const bgs = gsap.utils.toArray('.bg-img');
+    const sections = gsap.utils.toArray('section[id]');
+
+    sections.forEach((sec, i) => {
+        const bg = bgs[i];
+        if (!bg) return;
+
+        gsap.to(bg, {
+            scale: 1.1,
+            ease: 'none',
+            scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom top', scrub: 0.8 }
+        });
+
+        ScrollTrigger.create({
+            trigger: sec,
+            start: 'top center',
+            end: 'bottom center',
+            onEnter: () => bg.classList.add('is-active'),
+            onLeave: () => bg.classList.remove('is-active'),
+            onEnterBack: () => bg.classList.add('is-active'),
+            onLeaveBack: () => bg.classList.remove('is-active'),
+        });
+    });
+
+    gsap.to('#crestImg', {
+        scale: 1.15,
+        y: -50,
+        ease: 'none',
+        scrollTrigger: { trigger: '#intro', start: 'top top', end: 'bottom top', scrub: 1 }
+    });
+
+    // --- QUOTE 4 SPECIFIC IMAGE ANIMATION ---
+    const quote4ImageContainer = document.querySelector('#quote5-image-container');
+    ScrollTrigger.create({
+        trigger: '#quote5',
+        start: 'top center',
+        end: 'bottom center',
+        toggleClass: { targets: quote4ImageContainer, className: 'is-visible' }
+    });
+
+    gsap.to('#quote5-image', {
+        y: '100%', // Animate it to scroll DOWN the full height of the viewport
+        ease: 'none',
+        scrollTrigger: {
+            trigger: '#quote5',
+            start: 'top bottom', // Start when the top of quote4 hits the bottom of the screen
+            end: 'bottom top',   // End when the bottom of quote4 hits the top of the screen
+            scrub: 1
+        }
+    });
+
+
+    // --- General Quote Section Animations ---
+    const quoteSections = document.querySelectorAll('section[id^="quote"]');
+    quoteSections.forEach(sec => {
+        const quoteWrap = sec.querySelector('.quote-wrap');
+        const lines = sec.querySelectorAll('.quote-line');
+        const author = sec.querySelector('.author');
+        const cta = sec.querySelector('.cta-row');
+
+        gsap.to(quoteWrap, {
+            opacity: 1,
+            y: 0,
+            ease: 'power2.out',
+            duration: 1,
+            scrollTrigger: { trigger: sec, start: 'top 70%', toggleActions: 'play none none reverse' }
+        });
+
+        if (quoteWrap.offsetHeight > window.innerHeight) {
+            gsap.to(quoteWrap, {
+                y: -(quoteWrap.offsetHeight - window.innerHeight * 0.7),
+                ease: 'none',
+                scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom top', scrub: 1.2 }
+            });
+        }
+
+        lines.forEach(line => {
+            let start = (sec.id === 'quote4') ? 'top 80%' : 'top 65%';
+            let end = (sec.id === 'quote4') ? 'bottom 20%' : 'bottom 35%';
+            ScrollTrigger.create({ trigger: line, start: start, end: end, toggleClass: { targets: line, className: "is-highlighted" } });
+        });
+        
+        if (author && cta) {
+            gsap.to([author, cta], {
+                opacity: 1,
+                y: 0,
+                ease: 'power2.out',
+                duration: 0.8,
+                stagger: 0.1,
+                scrollTrigger: { trigger: sec, start: 'center 55%', toggleActions: 'play none none reverse' }
+            });
+        }
+    });
+
+    // --- Nav Active State ---
+    const navLinks = gsap.utils.toArray('.nav-right a');
+    sections.forEach(sec => {
+        ScrollTrigger.create({
+            trigger: sec,
+            start: 'top 60%',
+            end: 'bottom 60%',
+            onToggle: self => {
+                const link = navLinks.find(a => a.getAttribute('href') === `#${sec.id}`);
+                if (link) {
+                    if (self.isActive) {
+                        link.setAttribute('aria-current', 'true');
+                    } else {
+                        link.removeAttribute('aria-current');
+                    }
+                }
+            }
+        });
+    });
+
+})();
+		</script>
+	</body>
+	
+</html>
