@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Manchester Smart Home -- Join us. Be you.</title>
+		<title>Manchester Safe House -- Join us. Be you.</title>
 		<meta name="description"
 			content="Join Manchester Smart Home. Purposeful work protecting families and serving our community." />
 		
@@ -56,7 +56,7 @@ body
 		linear-gradient(180deg, #0a0a0b, #0b0b0c 60%, #0a0a0b);
 }
 
-.bg-img
+.bg-img, .fg-img
 {
 	position: absolute;
 	inset: 0;
@@ -66,11 +66,14 @@ body
 	opacity: 0;
 	transform: scale(1);
 	will-change: transform, opacity;
-	filter: saturate(105%) contrast(105%) brightness(90%);
 	transition: opacity .8s var(--ease);
 }
 
-.bg-img.is-active
+.fg-img {
+    z-index: 1; /* Place foreground images above background images */
+}
+
+.bg-img.is-active, .fg-img.is-active
 {
 	opacity: 1;
 }
@@ -79,6 +82,7 @@ body
 {
 	position: absolute;
 	inset: 0;
+    z-index: 2; /* Above all layered images */
 	background: linear-gradient(180deg, rgba(0, 0, 0, .58), rgba(0, 0, 0, .35) 45%, rgba(0, 0, 0, .58))
 }
 
@@ -105,8 +109,6 @@ body
     width: auto;
     max-width: none;
 }
-
-
 /* --- Header --- */
 .apple-header
 {
@@ -314,7 +316,7 @@ h2
 
 @media (prefers-reduced-motion: reduce)
 {
-	.bg-img, .quote-line {
+	.bg-img, .quote-line, .fg-img {
 		transition: none !important;
 		animation: none !important
 	}
@@ -322,27 +324,30 @@ h2
 
 		</style>
 	</head>
-	
+	        <!-- Story-specific Image Container -->
+        <div id="quote5-image-container" class="story-image-container">
+            <img id="quote5-image" src="fg5.webp" alt="Hand holding an iPhone displaying an Apple Account balance, symbolizing financial success." />
+        </div>
 	<body class="no-js">
 
 		<!-- Backgrounds -->
 		<div class="bg-stack" aria-hidden="true">
-			<img class="bg-img is-active" src="bg0.webp" alt="" />
-			<img class="bg-img" src="bg1.webp" alt="" />
-			<img class="bg-img" src="bg2.webp" alt="" />
-			<img class="bg-img" src="bg3.webp" alt="" />
-			<img class="bg-img" src="bg4.webp" alt="" />
-			<img class="bg-img" src="bg5.webp" alt="" />
-			<img class="bg-img" src="bg6.webp" alt="" />
-			<img class="bg-img" src="bg7.webp" alt="" />
-			<img class="bg-img" src="bg8.webp" alt="" />
+			<img class="bg-img" id="bg0" src="bg0.webp" alt="" />
+			<img class="bg-img" id="bg1" src="bg1.webp" alt="" />
+			<img class="bg-img" id="bg2" src="bg2.webp" alt="" />
+			<img class="bg-img" id="bg3" src="bg3.webp" alt="" />
+            
+            <!-- Quote 4 Layered Images -->
+			<img class="bg-img" id="bg4" src="bg4.webp" alt="" />
+            <img class="fg-img" id="fg4" src="fg4.webp" alt="" />
+            <img class="fg-img" id="fg40" src="fg40.webp" alt="" />
+
+			<img class="bg-img" id="bg5" src="bg5.webp" alt="" />
+			<img class="bg-img" id="bg6" src="bg6.webp" alt="" />
+			<img class="bg-img" id="bg7" src="bg7.webp" alt="" />
+			<img class="bg-img" id="bg8" src="bg8.webp" alt="" />
 			<div class="bg-overlay"></div>
 		</div>
-
-        <!-- Story-specific Image Container -->
-        <div id="quote5-image-container" class="story-image-container">
-            <img id="quote5-image" src="img4.webp" alt="Hand holding an iPhone displaying an Apple Account balance, symbolizing financial success." />
-        </div>
 		
 		<!-- Header -->
 		<header class="apple-header" role="banner" aria-label="Primary">
@@ -350,9 +355,9 @@ h2
 				<div class="brand-left">Career at <span class="accent">MANCHESTER SAFE HOUSE</span></div>
 				<nav class="nav-right" aria-label="Global">
 					<a href="#intro">Overview</a>
-					<a href="#quote1">Work at Manchester Smart Home</a>
-					<a href="#quote2">Life at Manchester Smart Home</a>
-					<a href="#quote3">Manchester Smart Home itself</a>
+					<a href="#quote1">Work at Manchester Safe House</a>
+					<a href="#quote2">Life at Manchester Safe House</a>
+					<a href="#quote3">Manchester Safe House itself</a>
                     <a href="#quote4">Shared Values</a>
                     <a href="#quote5">Benefits</a>
 				</nav>
@@ -364,7 +369,7 @@ h2
 			<section id="intro" aria-label="Intro">
 				<div class="content">
 					<img id="crestImg" class="crest" src="crest.webp"
-						alt="Manchester Smart Home crest logo" />
+						alt="Manchester Safe House crest logo" />
 					<h1 class="intro-title">
                         <span class="line">Join us.</span>
                         <span class="line"><span class="gold">Be you.</span></span>
@@ -400,7 +405,7 @@ h2
 					<p class="author">Tadju <span class="gold">01</span>, Sales Representative & Alarm Technician</p>
 					<div class="cta-row">
 						<a href="#" class="btn">Watch the film</a>
-						<a href="#" class="link">Learn about who works at Manchester Smart Home</a>
+						<a href="#" class="link">Learn about who works at Manchester Safe House</a>
 					</div>
 				</div>
 			</section>
@@ -410,7 +415,7 @@ h2
 				<div class="quote-wrap">
 					<h2 id="quote2-heading"><span class="gold">Neighbors </span>make the lion</h2>
 					<ul class="quote-lines">
-						<li class="quote-line">Manchester Smart Home</li>
+						<li class="quote-line">Manchester Safe House</li>
 						<li class="quote-line">has always focused</li>
 						<li class="quote-line">on one thing — <span class="gold">neighbors.</span></li>
 						<li class="quote-line"> <span class="gold">ꕹ 👇🏻</span></li>
@@ -428,7 +433,7 @@ h2
 					<p class="author">Albin <span class="gold">03</span>, Sales Representative & Alarm Technician</p>
 					<div class="cta-row">
 						<a href="#" class="btn">Watch the film</a>
-						<a href="#" class="link">Learn about work at Manchester Smart Home</a>
+						<a href="#" class="link">Learn about work at Manchester Safe House</a>
 					</div>
 				</div>
 			</section>
@@ -443,7 +448,7 @@ h2
                         <li class="quote-line">design may be the</li>
                         <li class="quote-line">lions’ den itself.</li>
 						<li class="quote-line"> <span class="gold">ꕹ </span></li>
-                        <li class="quote-line">Manchester Smart Home runs</li>
+                        <li class="quote-line">Manchester Safe House runs</li>
                         <li class="quote-line">on <span class="gold">integration,</span> </li> 
                         <li class="quote-line">not silos —</li> 
                         <li class="quote-line">that’s rare for a company in our industry.</li>
@@ -463,7 +468,7 @@ h2
 					<p class="author">Pedro <span class="gold">04</span>, Sales Representative & Alarm Technician</p>
 					<div class="cta-row">
 						<a href="#" class="btn">Watch the film</a>
-						<a href="#" class="link">Learn about how Manchester Smart Home is organized for innovation.</a>
+						<a href="#" class="link">Learn about how Manchester Safe House is organized for innovation.</a>
 					</div>
 				</div>
 			</section>
@@ -508,7 +513,7 @@ h2
 					<p class="author">Maya <span class="gold">37</span>, Sales Representative & Alarm Technician</p>
 					<div class="cta-row">
 						<a href="#" class="btn">Watch the film</a>
-						<a href="#" class="link">Learn about why we work at Manchester Smart Home</a>
+						<a href="#" class="link">Learn about why we work at Manchester Safe House</a>
 					</div>
 				</div>
 			</section>
@@ -537,7 +542,7 @@ h2
 					<p class="author">Derek <span class="gold">05</span>, Sales Representative & Alarm Technician</p>
 					<div class="cta-row">
 						<a href="#" class="btn">Watch the film</a>
-						<a href="#" class="link">Learn more about what works for Manchester Smart Home</a>
+						<a href="#" class="link">Learn more about what works for Manchester Safe House</a>
 					</div>
 				</div>
 			</section>
@@ -567,29 +572,52 @@ h2
 
     // --- SCROLL-BASED ANIMATIONS ---
 
-    const bgs = gsap.utils.toArray('.bg-img');
+    // --- Background & Foreground Image Transitions ---
     const sections = gsap.utils.toArray('section[id]');
+    const allBgs = gsap.utils.toArray('.bg-img');
 
-    sections.forEach((sec, i) => {
-        const bg = bgs[i];
-        if (!bg) return;
+    allBgs.forEach(bg => {
+        const sectionTrigger = bg.closest('section') || sections.find(sec => bg.id.includes(sec.id.replace('quote', '')));
+        if (!sectionTrigger) return;
 
+        // Standard zoom-in for all background images
         gsap.to(bg, {
             scale: 1.1,
             ease: 'none',
-            scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom top', scrub: 0.8 }
+            scrollTrigger: { trigger: sectionTrigger, start: 'top bottom', end: 'bottom top', scrub: 0.8 }
         });
+    });
 
+    // --- Special Counter-Zoom for Quote 4 Foreground Images ---
+    const fgImages = gsap.utils.toArray('#fg4, #fg40');
+    gsap.set(fgImages, { scale: 1.2 }); // Start slightly larger for zoom-out
+    gsap.to(fgImages, {
+        scale: 1, // Zoom out to normal size
+        ease: 'none',
+        scrollTrigger: {
+            trigger: '#quote4',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 0.8
+        }
+    });
+
+    // --- Visibility Toggling for All Layered Images ---
+    sections.forEach((sec, i) => {
+        const bg = document.querySelector(`#bg${i}`);
+        const fg = gsap.utils.toArray(`.fg-img[id*="fg${i}"]`);
+        
         ScrollTrigger.create({
             trigger: sec,
             start: 'top center',
             end: 'bottom center',
-            onEnter: () => bg.classList.add('is-active'),
-            onLeave: () => bg.classList.remove('is-active'),
-            onEnterBack: () => bg.classList.add('is-active'),
-            onLeaveBack: () => bg.classList.remove('is-active'),
+            onToggle: self => {
+                if (bg) bg.classList.toggle('is-active', self.isActive);
+                if (fg.length) fg.forEach(img => img.classList.toggle('is-active', self.isActive));
+            }
         });
     });
+
 
     gsap.to('#crestImg', {
         scale: 1.15,
@@ -597,8 +625,7 @@ h2
         ease: 'none',
         scrollTrigger: { trigger: '#intro', start: 'top top', end: 'bottom top', scrub: 1 }
     });
-
-    // --- QUOTE 4 SPECIFIC IMAGE ANIMATION ---
+   // --- QUOTE 4 SPECIFIC IMAGE ANIMATION ---
     const quote4ImageContainer = document.querySelector('#quote5-image-container');
     ScrollTrigger.create({
         trigger: '#quote5',
@@ -617,8 +644,6 @@ h2
             scrub: 1
         }
     });
-
-
     // --- General Quote Section Animations ---
     const quoteSections = document.querySelectorAll('section[id^="quote"]');
     quoteSections.forEach(sec => {
